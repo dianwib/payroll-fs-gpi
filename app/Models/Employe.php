@@ -12,7 +12,7 @@ use Illuminate\Notifications\Notifiable;
 
 class Employe extends Model
 {
-    use HasFactory, Notifiable, HasUlids, SoftDeletes;
+    use HasFactory, HasUlids, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -33,7 +33,6 @@ class Employe extends Model
         return $this->belongsTo(EmployeType::class);
     }
 
-
     public function department()
     {
         return $this->belongsTo(Department::class);
@@ -44,12 +43,19 @@ class Employe extends Model
         return $this->hasMany(JobHistory::class);
     }
 
+    public function licenseHistories()
+    {
+        return $this->hasMany(LicenseHistory::class);
+    }
 
+    public function certificateHistories()
+    {
+        return $this->hasMany(CertificateHistory::class);
+    }
 
     protected static function booted()
     {
-        static::addGlobalScope(new ActiveScope());
-        static::addGlobalScope(new IsDeleteScope());
+        static::addGlobalScope(new ActiveScope);
+        static::addGlobalScope(new IsDeleteScope);
     }
-
 }

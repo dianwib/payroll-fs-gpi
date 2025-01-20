@@ -6,6 +6,7 @@ use App\Filament\Resources\EmployeResource\Pages;
 use App\Models\Employe;
 use App\Models\Scopes\ActiveScope;
 use App\Models\Scopes\IsDeleteScope;
+use Filament\Forms\Components\Card;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
@@ -39,6 +40,7 @@ class EmployeResource extends Resource
         return $form
             ->schema([
                 //
+                Card::make([
                 Tabs::make('Tabs')
                     ->tabs([
                         Tab::make('Employe')
@@ -96,13 +98,53 @@ class EmployeResource extends Resource
                                         DatePicker::make('end_date')
                                             ->required(),
                                         Textarea::make('remarks')
-                                        ->columnSpan(2),
+                                            ->columnSpan(2),
                                     ])
                                     ->columns(2)
                                     ->createItemButtonLabel('Add Experience')
                                     ->deletable(),
                             ]),
+
+                            Tab::make('License Experiences')
+                            ->schema([
+                                Repeater::make('licenseHistories')
+                                    ->relationship('licenseHistories')
+                                    ->schema([
+                                        TextInput::make('name')
+                                            ->required(),
+                                        DatePicker::make('start_date')
+                                            ->required(),
+                                        DatePicker::make('end_date')
+                                            ->required(),
+                                        Textarea::make('remarks')
+                                            ->columnSpan(2),
+                                    ])
+                                    ->columns(2)
+                                    ->createItemButtonLabel('Add License')
+                                    ->deletable(),
+                            ]),
+
+                            Tab::make('Certificate Histories')
+                            ->schema([
+                                Repeater::make('certificateHistories')
+                                    ->relationship('certificateHistories')
+                                    ->schema([
+                                        TextInput::make('name')
+                                            ->required(),
+                                        DatePicker::make('start_date')
+                                            ->required(),
+                                        DatePicker::make('end_date')
+                                            ->required(),
+                                        Textarea::make('remarks')
+                                            ->columnSpan(2),
+                                    ])
+                                    ->columns(2)
+                                    ->createItemButtonLabel('Add Certificate')
+                                    ->deletable(),
+                            ]),
                     ]),
+                ]),
+
 
                 // TextInput::make('name')
                 //     ->label('Employe Name')

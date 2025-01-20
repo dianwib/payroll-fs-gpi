@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('education_histories', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->ulid('employe_id');
-            $table->ulid('applicant_id');
+            $table->ulid('employe_id')->nullable();
+            $table->ulid('applicant_id')->nullable();
             $table->string('name', 255);
             $table->ulid('degree_education_type_id');
             $table->date('start_date')->default(null);
