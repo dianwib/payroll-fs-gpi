@@ -15,10 +15,10 @@ return new class extends Migration
             $table->ulid('id')->primary();
             $table->ulid('department_id');
             $table->ulid('role_id');
-            $table->integer('basic_salary')->default(0);
-            $table->integer('meal_allowances')->default(0);
-            $table->integer('transport_allowances')->default(0);
-            $table->integer('position_allowances')->default(0);
+            $table->numeric('basic_salary')->default(0);
+            $table->numeric('meal_allowances')->default(0);
+            $table->numeric('transport_allowances')->default(0);
+            $table->numeric('position_allowances')->default(0);
             $table->boolean('is_active')->default(true);
 
             $table->ulid('created_by')->nullable();
